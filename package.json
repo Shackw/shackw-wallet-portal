@@ -14,6 +14,7 @@
     "deploy": "yarn build && yarn deploy:clean && scp -r dist/. conoha-wing-shackw:~/public_html/wallet.shackw.com/"
   },
   "dependencies": {
+    "@radix-ui/react-separator": "^1.1.8",
     "@radix-ui/react-slot": "^1.2.4",
     "@reown/appkit": "^1.8.15",
     "@reown/appkit-adapter-wagmi": "^1.8.15",

@@ -1,4 +1,4 @@
-import { arbitrum, mainnet } from "@reown/appkit/networks";
+import { mainnet, base, polygon, sepolia, baseSepolia, polygonAmoy } from "@reown/appkit/networks";
 import { createAppKit } from "@reown/appkit/react";
 import { WagmiAdapter } from "@reown/appkit-adapter-wagmi";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
@@ -17,7 +17,7 @@ const metadata = {
   icons: ["https://wallet.shackw.com/icon.png"]
 };
 
-const networks = [mainnet, arbitrum];
+const networks = [mainnet, base, polygon, sepolia, baseSepolia, polygonAmoy];
 
 const wagmiAdapter = new WagmiAdapter({
   networks,
@@ -27,7 +27,7 @@ const wagmiAdapter = new WagmiAdapter({
 
 createAppKit({
   adapters: [wagmiAdapter],
-  networks,
+  networks: [mainnet],
   projectId,
   metadata,
   features: {

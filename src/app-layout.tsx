@@ -1,45 +1,26 @@
-import { Outlet, NavLink } from "react-router-dom";
+import { Link, Outlet, useLocation } from "react-router-dom";
 
 import { Button } from "@/components/ui/button";
 
-import type { ReactNode } from "react";
+const AppLayout = () => {
+  const loc = useLocation();
 
-const navLinkBase = "text-sm font-medium transition-colors hover:text-foreground/80";
-const navLinkActive = "text-foreground";
-const navLinkInactive = "text-foreground/60";
-
-const NavItem = ({ to, children }: { to: string; children: ReactNode }) => (
-  <NavLink to={to} className={({ isActive }) => [navLinkBase, isActive ? navLinkActive : navLinkInactive].join(" ")}>
-    {children}
-  </NavLink>
-);
-
-export const AppLayout = () => {
   return (
-    <div className="min-h-screen bg-background text-foreground">
-      <header className="border-b">
-        <div className="mx-auto flex h-16 max-w-5xl items-center justify-between px-4">
-          <div className="flex items-center gap-2">
-            <div className="h-8 w-8 rounded-xl bg-primary/10 flex items-center justify-center text-xs font-bold text-primary">
-              SH
-            </div>
-            <div className="flex flex-col leading-tight">
-              <span className="text-sm font-semibold">Shackw</span>
-              <span className="text-[11px] text-muted-foreground">Stable-first crypto experience</span>
-            </div>
-          </div>
+    <div className="min-h-dvh bg-background text-foreground">
+      <header className="sticky top-0 z-50 border-b bg-background/80 backdrop-blur">
+        <div className="mx-auto flex h-14 max-w-5xl items-center justify-between px-4">
+          <Link to="/" className="font-semibold tracking-tight">
+            Shackw Wallet
+          </Link>
 
-          <nav className="flex items-center gap-6">
-            <NavItem to="/">Home</NavItem>
-            <NavItem to="/wallet">Wallet</NavItem>
-            <NavItem to="/store">Store</NavItem>
-          </nav>
-
-          <div className="hidden sm:block">
-            <Button size="sm" variant="outline">
-              Open ShackwWallet
+          <nav className="flex items-center gap-2">
+            <Button asChild variant={loc.pathname.startsWith("/tester") ? "default" : "ghost"} size="sm">
+              <Link to="/tester">Tester</Link>
             </Button>
-          </div>
+            <Button asChild variant={loc.pathname.startsWith("/developers") ? "default" : "ghost"} size="sm">
+              <Link to="/developers">Developers</Link>
+            </Button>
+          </nav>
         </div>
       </header>
 
@@ -47,12 +28,11 @@ export const AppLayout = () => {
         <Outlet />
       </main>
 
-      <footer className="border-t">
-        <div className="mx-auto flex max-w-5xl items-center justify-between px-4 py-4 text-xs text-muted-foreground">
-          <span>© {new Date().getFullYear()} Shackw</span>
-          <span>Built for JPYC / USDC / EURC</span>
-        </div>
+      <footer className="border-t py-8">
+        <div className="mx-auto max-w-5xl px-4 text-sm text-muted-foreground">© {new Date().getFullYear()} Shackw</div>
       </footer>
     </div>
   );
 };
+
+export default AppLayout;
